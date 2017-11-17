@@ -1,0 +1,8 @@
+
+if [ -f ~/.zshrc]; then
+	. ~/.zshrc
+fi
+
+#PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin
+
+#export PATH
