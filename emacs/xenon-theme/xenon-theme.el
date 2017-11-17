@@ -1,10 +1,11 @@
 ;; xenon-theme
 
-;; based on Jim Myhrberg's tomorrow-night-paradise-theme:
-;; https://github.com/jimeh/tomorrow-night-paradise-theme.el/blob/master/tomorrow-night-paradise-theme.el
+;; Based on yupferris' pastel-tron-theme 
+;; https://github.com/yupferris/dotfiles/blob/master/emacs/pastel-tron-theme/pastel-tron-theme.el
+;; and vim jellyeabns theme
 
 (deftheme xenon
-  "Soft but vibrant colors")
+  "Soft but vibrant colors. Recommend changing Faces->Basic->Default->foreground to whites moke")
 
 (let ((background "#0f0f0f")
       (selection "#0f0f0f")
