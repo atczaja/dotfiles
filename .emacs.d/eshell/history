@@ -1,0 +1,15 @@
+ls
+cd emacs/atelier/
+ls
+dnf --help
+python
+exit
+cd emacs/
+ls
+mkdir xenon-theme
+cd pastel-tron-theme/
+ls
+cp pastel-tron-theme.el ../xenon-theme/
+cd ../xenon-theme/
+ls
+mv pastel-tron-theme.el xenon-theme.el
