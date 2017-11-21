@@ -13,3 +13,12 @@ cp pastel-tron-theme.el ../xenon-theme/
 cd ../xenon-theme/
 ls
 mv pastel-tron-theme.el xenon-theme.el
+cd emacs/
+ls
+mv xenon-theme/ nyx-theme
+cd nyx-theme/
+ls
+mv xenon-theme.el nyx-theme.el
+ls
+rm xenon-theme.el\~ 
+ls

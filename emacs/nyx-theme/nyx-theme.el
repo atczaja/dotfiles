@@ -1,10 +1,11 @@
-;; xenon-theme
+;; nyx-theme
 
-;; based on Jim Myhrberg's tomorrow-night-paradise-theme:
-;; https://github.com/jimeh/tomorrow-night-paradise-theme.el/blob/master/tomorrow-night-paradise-theme.el
+;; Based on yupferris' pastel-tron-theme 
+;; https://github.com/yupferris/dotfiles/blob/master/emacs/pastel-tron-theme/pastel-tron-theme.el
+;; and vim jellyeabns theme
 
-(deftheme xenon
-  "Soft but vibrant colors")
+(deftheme nyx
+  "Soft but vibrant colors. Recommend changing Faces->Basic->Default->foreground to whites moke")
 
 (let ((background "#0f0f0f")
       (selection "#0f0f0f")
@@ -15,7 +16,7 @@
       (gray "#212121") (gray-2 "#1c1c1c") (gray-3 "#121212")
                        (gray-4 "#080808")
       (red "#e35152") (red-2 "#ff3333") (red-3 "#ff34000")
-      (yellow "#fef1b5") (yellow-2 "#cdcd00")
+      (yellow "#fff1b5") (yellow-2 "#cdcd00")
       (orange "#e78700")
       (green "#7ccd8c")
       (aqua "#33a1c9")
@@ -23,7 +24,7 @@
       (purple "#dda0ff"))
 
   (custom-theme-set-faces
-   'xenon
+   'nyx
 
    ;; Basics
    `(default ((t (:background ,background :foreground ,foreground))))
@@ -35,16 +36,16 @@
    ;; Font-lock stuff
    `(font-lock-builtin-face ((t (:foreground ,blue))))
    `(font-lock-comment-face ((t (:foreground ,comment))))
-   `(font-lock-constant-face ((t (:foreground ,green))))
+   `(font-lock-constant-face ((t (:foreground ,red))))
    `(font-lock-doc-face ((t (:foreground ,comment))))
    `(font-lock-doc-string-face ((t (:foreground ,comment))))
-   `(font-lock-function-name-face ((t (:foreground ,blue))))
-   `(font-lock-keyword-face ((t (:foreground ,purple))))
+   `(font-lock-function-name-face ((t (:foreground ,aqua))))
+   `(font-lock-keyword-face ((t (:foreground ,blue))))
    `(font-lock-negation-char-face ((t (:foreground ,aqua))))
    `(font-lock-preprocessor-face ((t (:foreground ,red))))
    `(font-lock-string-face ((t (:foreground ,green))))
    `(font-lock-type-face ((t (:foreground ,yellow))))
-   `(font-lock-variable-name-face ((t (:foreground ,aqua))))
+   `(font-lock-variable-name-face ((t (:foreground ,purple))))
    `(font-lock-warning-face ((t (:foreground ,red))))
 
    ;; UI related
@@ -100,7 +101,7 @@
    )
 
   (custom-theme-set-variables
-   'xenon
+   'nyx
 
    ;; Fill Column Indicator mode
    `(fci-rule-color ,gray-2)
@@ -113,4 +114,4 @@
      ;; black, red, green, yellow, blue, magenta, cyan, white
      [unspecified ,background ,red ,green ,yellow ,blue ,purple ,blue ,foreground])))
 
-(provide-theme 'xenon)
+(provide-theme 'nyx)

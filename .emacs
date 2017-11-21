@@ -63,10 +63,10 @@
 ;;(require 'pastel-tron-theme)
 ;;(load-theme 'pastel-tron t)
 
-(add-to-list 'load-path "~/emacs/xenon-theme/")
-(add-to-list 'custom-theme-load-path "~/emacs/xenon-theme")
-(require 'xenon-theme)
-(load-theme 'xenon t)
+(add-to-list 'load-path "~/emacs/nyx-theme/")
+(add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
+(require 'nyx-theme)
+(load-theme 'nyx t)
 
 ;;(require 'base16-atelierplateau-dark-theme)
 ;;(require 'base16-atelierforest-dark-theme)
