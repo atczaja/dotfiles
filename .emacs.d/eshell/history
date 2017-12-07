@@ -22,3 +22,10 @@ mv xenon-theme.el nyx-theme.el
 ls
 rm xenon-theme.el\~ 
 ls
+zsh
+exit
+what
+whos
+who
+vim
+exit

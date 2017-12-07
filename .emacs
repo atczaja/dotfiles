@@ -17,7 +17,9 @@
 ;; Windmove
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
-
+;; Show matching parens
+(setq show-paren-delay 0)
+(show-paren-mode t)
 
 ;; Language formatting
 (setq c-basic-offset 4)

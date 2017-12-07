@@ -16,10 +16,10 @@
       (gray "#212121") (gray-2 "#1c1c1c") (gray-3 "#121212")
                        (gray-4 "#080808")
       (red "#e35152") (red-2 "#ff3333") (red-3 "#ff34000")
-      (yellow "#fff1b5") (yellow-2 "#cdcd00")
+      (yellow "#fff1b9") (yellow-2 "#cdcd00")
       (orange "#e78700")
       (green "#7ccd8c")
-      (aqua "#33a1c9")
+      (aqua "#33bab9")
       (blue "#7eb6ff")
       (purple "#dda0ff"))
 
@@ -57,7 +57,7 @@
    `(linum ((t (:background ,background :foreground ,gray))))
 
    ;; show-paren-mode
-   `(show-paren-match ((t (:background ,purple :foreground ,gray-2))))
+   `(show-paren-match ((t (:background ,green :foreground ,gray-2))))
    `(show-paren-mismatch ((t (:background ,orange :foreground ,gray-2))))
 
    ;; ido

@@ -1,9 +1,11 @@
 " Generic
+set nocompatible
 syntax enable
 filetype on
 filetype plugin on
 set number relativenumber
 filetype indent plugin on
+set encoding=utf-8
 
 " Pathogen
 execute pathogen#infect()
@@ -18,6 +20,7 @@ let g:enable_bold_font = 1
 colorscheme jellybeans
 let g:jellybeans_use_term_italics = 1
 
+" Tab settings
 set tabstop=4
 set softtabstop=4
 set noexpandtab
@@ -49,15 +52,12 @@ nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
 " Nerdtree
-map <C-n> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"map <C-n> :NERDTreeToggle<CR>
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-" Airline
+" Airline / Statusline
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-"let g:airline_theme = "tomorrow"
-"let g:airline_theme = "badwolf"
 let g:airline_theme = "jellybeans"
 set laststatus=2
-set encoding=utf-8
