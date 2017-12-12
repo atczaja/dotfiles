@@ -29,3 +29,12 @@ whos
 who
 vim
 exit
+ls
+cd exercism/rust/
+ls
+exercism fetch
+cd reverse-string/
+ls
+cargo test
+cargo test
+exit
