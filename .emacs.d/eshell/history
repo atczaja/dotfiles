@@ -38,3 +38,13 @@ ls
 cargo test
 cargo test
 exit
+ls
+mkdir build
+cd build
+cmake --help
+cmake -G --help
+cmake -G "Unix Makefiles"
+ls ..
+cp ../CMakeLists.txt .
+ls
+cmake -G "Unix Makefiles"

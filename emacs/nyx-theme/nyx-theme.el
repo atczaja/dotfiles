@@ -39,7 +39,7 @@
    `(font-lock-constant-face ((t (:foreground ,red))))
    `(font-lock-doc-face ((t (:foreground ,comment))))
    `(font-lock-doc-string-face ((t (:foreground ,comment))))
-   `(font-lock-function-name-face ((t (:foreground ,aqua))))
+   `(font-lock-function-name-face ((t (:foreground ,green))))
    `(font-lock-keyword-face ((t (:foreground ,blue))))
    `(font-lock-negation-char-face ((t (:foreground ,aqua))))
    `(font-lock-preprocessor-face ((t (:foreground ,red))))
