@@ -28,6 +28,8 @@
 
 
 ;; Clang Format
+;; To make .clang-format file for a project:
+;; $ clang-format -style=llvm -dump-config > .clang-format
 (load "/home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.el")
 (global-set-key (kbd "C-M-`") 'clang-format-region)
 
