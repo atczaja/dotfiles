@@ -8,18 +8,22 @@ set number relativenumber
 filetype indent plugin on
 set encoding=utf-8
 
+" Disable audio and visual bells
+set noerrorbells visualbell t_vb=
+autocmd GUIenter * set visualbell t_vb=
+
 " Pathogen
 execute pathogen#infect()
 
 " Colorscheme
 set t_Co=256
 set background=dark
-let g:enable_bold_font = 1
 "colorscheme hybrid_reverse
 "colorscheme badwolf
 "let g:badwolf_tabline=0
 colorscheme jellybeans
 let g:jellybeans_use_term_italics = 1
+let g:enable_bold_font = 1
 
 " Tab settings
 set tabstop=4
@@ -31,15 +35,13 @@ set smarttab
 " Clang Format
 " To make .clang-format file for a project:
 " $ clang-format -style=llvm -dump-config > .clang-format
-map <C-K> :pyf /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
-imap <C-K> <c-o>:pyf /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
+map <C-K> :pyf /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<cr> 
 
-" Bracket Mappings
+" Bracket Mappings 
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
 inoremap ' ''<Esc>i
-inoremap " ""<Esc>i
 
 " Tab Mappings
 nnoremap <C-t> :tabedit 
@@ -47,14 +49,14 @@ nnoremap <C-h> gT
 nnoremap <C-l> gt
 
 " Window Mappings
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
+nmap <silent> <S-k> :wincmd k<CR>
+nmap <silent> <S-j> :wincmd j<CR>
+nmap <silent> <S-h> :wincmd h<CR>
+nmap <silent> <S-l> :wincmd l<CR>
 
-" Nerdtree
-"map <C-n> :NERDTreeToggle<CR>
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Set splitting directions to expected behavior
+set splitright
+set splitbelow
 
 " Airline / Statusline
 let g:airline_section_b = '%{strftime("%c")}'

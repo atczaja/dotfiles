@@ -46,7 +46,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (markdown-preview-mode rainbow-mode darktooth-theme jbeans-theme badwolf-theme doom-themes avy ace-jump-mode base16-theme matlab-mode ujelly-theme rust-mode color-theme-sanityinc-tomorrow badger-theme autopair atom-dark-theme)))
+    (vimrc-mode markdown-preview-mode rainbow-mode darktooth-theme jbeans-theme badwolf-theme doom-themes avy ace-jump-mode base16-theme matlab-mode ujelly-theme rust-mode color-theme-sanityinc-tomorrow badger-theme autopair atom-dark-theme)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(tool-bar-mode nil))
