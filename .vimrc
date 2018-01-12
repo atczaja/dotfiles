@@ -4,9 +4,11 @@ set nocompatible
 syntax enable
 filetype on
 filetype plugin on
-set number relativenumber
 filetype indent plugin on
+set number relativenumber
 set encoding=utf-8
+set wildmenu   " better tab completion
+set showcmd    " show incomplete commands
 
 " Disable audio and visual bells
 set noerrorbells visualbell t_vb=
@@ -53,6 +55,7 @@ nmap <silent> <S-k> :wincmd k<CR>
 nmap <silent> <S-j> :wincmd j<CR>
 nmap <silent> <S-h> :wincmd h<CR>
 nmap <silent> <S-l> :wincmd l<CR>
+
 
 " Set splitting directions to expected behavior
 set splitright

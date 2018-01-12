@@ -92,10 +92,10 @@
 ;;(load-theme 'darktooth t)
 
 ;; Packages
-(require 'autopair)
-(autopair-global-mode)
+;;(require 'autopair)
+;;(autopair-global-mode)
 ;; Avy
 (require 'avy)
 (global-set-key (kbd "C-:") 'avy-goto-char-timer)
 ;; Rainbow mode for showing color of hex code
-(require 'rainbow-mode)
+;;(require 'rainbow-mode)
