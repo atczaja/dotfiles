@@ -1,6 +1,6 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/aczaja/exercism/rust/rotational-cipher'
-let g:netrw_dirhist_2='/home/aczaja/exercism/python'
-let g:netrw_dirhist_3='/home/aczaja/exercism/python/hello-world'
-let g:netrw_dirhist_4='/home/aczaja/exercism/python/hello-world/__pycache__'
+let g:netrw_dirhist_1='/home/aczaja/.vim/bundle/vim-airline-themes/autoload'
+let g:netrw_dirhist_2='/home/aczaja/.vim/bundle/vim-airline-themes/autoload/airline'
+let g:netrw_dirhist_3='/home/aczaja/.vim/bundle/vim-airline-themes/autoload/airline/themes'
+let g:netrw_dirhist_4='/home/aczaja/dotfiles/.vim/bundle/vim-airline-themes/autoload/airline/themes'

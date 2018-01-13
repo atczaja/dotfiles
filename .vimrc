@@ -20,11 +20,11 @@ execute pathogen#infect()
 " Colorscheme
 set t_Co=256
 set background=dark
-"colorscheme hybrid_reverse
+colorscheme hybrid_reverse
 "colorscheme badwolf
 "let g:badwolf_tabline=0
-colorscheme jellybeans
-let g:jellybeans_use_term_italics = 1
+"colorscheme jellybeans
+"let g:jellybeans_use_term_italics = 1
 let g:enable_bold_font = 1
 
 " Tab settings
@@ -50,13 +50,6 @@ nnoremap <C-t> :tabedit
 nnoremap <C-h> gT
 nnoremap <C-l> gt
 
-" Window Mappings
-nmap <silent> <S-k> :wincmd k<CR>
-nmap <silent> <S-j> :wincmd j<CR>
-nmap <silent> <S-h> :wincmd h<CR>
-nmap <silent> <S-l> :wincmd l<CR>
-
-
 " Set splitting directions to expected behavior
 set splitright
 set splitbelow
@@ -65,6 +58,6 @@ set splitbelow
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "jellybeans"
+let g:airline_theme = "hybrid"
 set laststatus=2
 
