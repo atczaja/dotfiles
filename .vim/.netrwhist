@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/aczaja/.vim/bundle/vim-airline-themes/autoload'
 let g:netrw_dirhist_2='/home/aczaja/.vim/bundle/vim-airline-themes/autoload/airline'
 let g:netrw_dirhist_3='/home/aczaja/.vim/bundle/vim-airline-themes/autoload/airline/themes'
 let g:netrw_dirhist_4='/home/aczaja/dotfiles/.vim/bundle/vim-airline-themes/autoload/airline/themes'
+let g:netrw_dirhist_5='/home/aczaja/exercism/rust/acronym/target/debug'
+let g:netrw_dirhist_6='/home/aczaja/dotfiles/.vim/bundle/Spacegray.vim'
+let g:netrw_dirhist_7='/home/aczaja/exercism/cpp/grade-school'

@@ -1,6 +1,5 @@
 
 " Generic
-set nocompatible
 syntax enable
 filetype on
 filetype plugin on
@@ -19,12 +18,11 @@ execute pathogen#infect()
 
 " Colorscheme
 set t_Co=256
-set background=dark
-colorscheme hybrid_reverse
-"colorscheme badwolf
-"let g:badwolf_tabline=0
+"set background=dark
+"colorscheme spacegray
 "colorscheme jellybeans
 "let g:jellybeans_use_term_italics = 1
+colorscheme minimalist
 let g:enable_bold_font = 1
 
 " Tab settings
@@ -37,13 +35,12 @@ set smarttab
 " Clang Format
 " To make .clang-format file for a project:
 " $ clang-format -style=llvm -dump-config > .clang-format
-map <C-K> :pyf /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<cr> 
+map <C-K> :pyf /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<CR> 
 
 " Bracket Mappings 
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
-inoremap ' ''<Esc>i
 
 " Tab Mappings
 nnoremap <C-t> :tabedit 
@@ -55,9 +52,10 @@ set splitright
 set splitbelow
 
 " Airline / Statusline
-let g:airline_section_b = '%{strftime("%c")}'
+"let g:airline_section_b = '%{strftime("%c")}'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "hybrid"
+let g:airline_theme = "minimalist"
+"set statusline=%f%m%r%h%w\ \ \ \ \ \ \ [%{&ff}]%y\ \ \ \ \ \ \ [%4lL,%4vC\ \|\ %LL\ \|\ %p%%]
 set laststatus=2
 
