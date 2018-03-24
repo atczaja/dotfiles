@@ -59,7 +59,7 @@ colorscheme jellybeans
 " Clang Format
 " To make .clang-format file for a project:
 " $ clang-format -style=llvm -dump-config > .clang-format
-map <C-K> :pyf /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<CR> 
+map <C-K> :py3f /home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.py<CR> 
 
 " vim-cpp-enhanced-highlighting options
 let g:cpp_class_scope_highlight = 1

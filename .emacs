@@ -1,4 +1,5 @@
 
+;;;; Paackage Config Setup
 ;; Melpa
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
@@ -17,7 +18,7 @@
 
 
 
-;; Managed by Emacs
+;;;; Managed by Emacs
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -43,14 +44,16 @@
 
 
 
-;; Packages (configured using use-package)
+;;;; Packages (configured using use-package)
+(use-package paredit
+  :ensure t
+  :init (progn
+		  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
+		  (add-hook 'common-lisp-mode-hook #'enable-paredit-mode)))
 (use-package autopair
   ;; https://github.com/joaotavora/autopair
   :ensure t
-  ;;:diminish autopair-global-mode
-  ;;:config (autopair-global-mode))
-  ;;:config (autopair-global-mode))
-  :diminish autopair-global-mode
+  :diminish autopair-mode
   :config (autopair-global-mode 1))
 (use-package avy
   ;; https://github.com/bbatsov/emacs.d/blob/master/init.el
@@ -70,16 +73,9 @@
   (require 'rust-mode)
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode)))
 
-;; Packages
-;;(require 'autopair)
-;;(autopair-global-mode)
-;; Avy
-;;(require 'avy)
-;;(global-set-key (kbd "C-:") 'avy-goto-char-timer)
 
 
-
-;; Settings
+;;;; Settings
 ;; Line Numbers and Tabs
 (global-linum-mode t)
 ;; Windmove
@@ -92,8 +88,6 @@
 (setq c-basic-offset 4)
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode t)
-
-
 
 ;; Clang Format
 ;; To make .clang-format file for a project:
