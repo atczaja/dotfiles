@@ -11,7 +11,6 @@ Plugin 'Vundlevim/Vundle.vim'
 
 " Colorscheme and Airline plugins
 Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'zacanger/angr.vim'
 Plugin 'dikiaap/minimalist'
 Plugin 'mhartington/oceanic-next'
 Plugin 'ajh17/Spacegray.vim'
@@ -19,7 +18,6 @@ Plugin 'jacoborus/tender.vim'
 Plugin 'ajmwagar/vim-deus'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'nightsense/vimspectr'
 
 " Language plugins
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -50,7 +48,8 @@ autocmd GUIenter * set visualbell t_vb=
 
 " Colorscheme
 set t_Co=256
-colorscheme jellybeans
+"colorscheme jellybeans
+colorscheme tender
 "colorscheme spacegray
 "colorscheme minimalist
 "colorscheme deus
@@ -92,7 +91,8 @@ set splitbelow
 let g:airline_section_b = '%{strftime("%c")}'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "jellybeans"
+"let g:airline_theme = "jellybeans"
+let g:airline_theme = "tender"
 "set statusline=%f%m%r%h%w\ \ \ \ \ \ \ [%{&ff}]%y\ \ \ \ \ \ \ [%4lL,%4vC\ \|\ %LL\ \|\ %p%%]
 set laststatus=2
 
