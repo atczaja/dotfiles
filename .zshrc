@@ -4,6 +4,8 @@ if [ -f /etc/zshrc ]; then
 	. /etc/zshrc
 fi
 
+export TERM="xterm-256color"
+
 # Edit PATH
 PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:
 export PATH

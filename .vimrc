@@ -50,10 +50,6 @@ autocmd GUIenter * set visualbell t_vb=
 set t_Co=256
 "colorscheme jellybeans
 colorscheme tender
-"colorscheme spacegray
-"colorscheme minimalist
-"colorscheme deus
-"colorscheme OceanicNext
 
 " Clang Format
 " To make .clang-format file for a project:
