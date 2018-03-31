@@ -16,8 +16,10 @@ Plugin 'mhartington/oceanic-next'
 Plugin 'ajh17/Spacegray.vim'
 Plugin 'jacoborus/tender.vim'
 Plugin 'ajmwagar/vim-deus'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+Plugin 'itchyny/lightline.vim'
+Plugin 'mgee/lightline-bufferline'
 
 " Language plugins
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -48,8 +50,7 @@ autocmd GUIenter * set visualbell t_vb=
 
 " Colorscheme
 set t_Co=256
-"colorscheme jellybeans
-colorscheme tender
+colorscheme jellybeans
 
 " Clang Format
 " To make .clang-format file for a project:
@@ -84,11 +85,37 @@ set splitright
 set splitbelow
 
 " Airline / Statusline
-let g:airline_section_b = '%{strftime("%c")}'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
+"let g:airline_section_b = '%{strftime("%c")}'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline_powerline_fonts = 1
 "let g:airline_theme = "jellybeans"
-let g:airline_theme = "tender"
 "set statusline=%f%m%r%h%w\ \ \ \ \ \ \ [%{&ff}]%y\ \ \ \ \ \ \ [%4lL,%4vC\ \|\ %LL\ \|\ %p%%]
-set laststatus=2
+
+" Lightline
+" https://github.com/itchyny/lightline.vim
+" http://newbilityvery.github.io/2017/08/04/switch-to-lightline/
+let g:lightline = {
+	\ 'colorscheme': 'jellybeans',
+	\ 'active': {
+	\   'left': [ ['mode', 'paste' ],
+	\             [ 'readonly', 'filename', 'modified',] ]
+	\ },
+	\ 'component': {
+	\   'charvaluehex': '0x%B'
+	\ }
+	\ }
+"let g:lightline.tabline = {
+"    \ 'left': [ ['buffers'] ],
+"    \ 'right': [ ['close'] ]
+"    \ }
+"let g:lightline.component_expand = {
+"    \ 'buffers': 'lightline#bufferline#buffers'
+"	\ }
+"let g:lightline.component_type = {
+"    \ 'buffers': 'tabsel'
+"	\ }
+set noshowmode  " hide repeated info along bottom line
+set laststatus=2 "  show statusline
+"set showtabline=2 " show tabline
+"set guioptions-=e  " hide gui tabline
 
