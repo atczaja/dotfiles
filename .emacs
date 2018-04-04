@@ -13,7 +13,7 @@
 ;; Configure use-package
 (eval-when-compile
   ;; https://github.com/jwiegley/use-package
-  (add-to-list 'load-path "~/.emacs.d/lisp/")
+  (add-to-list 'load-path "~/.lisp")
   (require 'use-package))
 
 
@@ -49,12 +49,14 @@
   ;; https://emacs.stackexchange.com/questions/34277/best-practice-for-emacs-helm-setup-after-use-package-verse
   ;; https://github.com/jwiegley/dot-emacs/blob/master/init.el
   :ensure t
+  :load-path "~/.lisp/helm"
   :bind ("M-x" . helm-M-x)
   :config (helm-autoresize-mode 1))
 
 (use-package helm-descbinds
   ;; replace default keybindings descriptions using 'C-h b' with helm interface
   :ensure t
+  :load-path "~/.lisp/helm-descbinds"
   :bind ("C-h b" . helm-descbinds)
   :init
   (fset 'describe-bindings 'helm-descbinds))
@@ -62,11 +64,13 @@
 (use-package helm-describe-modes
   ;; replace default mode descriptions using "C-h m" with helm interface
   :ensure t
+  :load-path "~/.lisp/helm-describe-modes"
   :after helm
   :bind ("C-h m" . helm-describe-modes))
 
 (use-package paredit
   :ensure t
+  :load-path "~/.lisp/paredit"
   :init (progn
 		  (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode)
 		  (add-hook 'common-lisp-mode-hook #'enable-paredit-mode)))
@@ -74,26 +78,31 @@
 (use-package autopair
   ;; https://github.com/joaotavora/autopair
   :ensure t
+  :load-path "~/.lisp/autopair"
   :diminish autopair-mode
   :config (autopair-global-mode 1))
 
 (use-package avy
   ;; https://github.com/bbatsov/emacs.d/blob/master/init.el
   :ensure t
+  :load-path "~/.lisp/avy"
   :bind ("C-:" . avy-goto-char-timer))
 
 (use-package markdown-mode
   ;; https://github.com/krobertson/emacs.d/blob/master/packages.el
   :ensure t
+  :load-path "~/.lisp/markdown-mode"
   :mode ("\\.\\(m\\(ark\\)?down\\|md\\)$" . markdown-mode))
 
 (use-package vimrc-mode
   :ensure t
+  :load-path "~/.lisp/vimrc-mode"
   :defer t)
 
 (use-package rust-mode
   ;; https://github.com/nlopes/dotfiles/blob/master/.emacs.d/rust.el
   :ensure t
+  :load-path "~/.lisp/rust-mode"
   :defer t
   :init
   (require 'rust-mode)
@@ -101,6 +110,7 @@
 
 (use-package matlab-mode
   :ensure t
+  :load-path "~/.lisp/matlab-mode"
   :defer t)
 
 
