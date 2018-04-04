@@ -27,7 +27,7 @@ Turn on pseudo-structural editing of Lisp code.
 
 ;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/paredit-20171126.1805/paredit-autoloads.el"
 ;;;;;;  "../../../../.emacs.d/elpa/paredit-20171126.1805/paredit.el")
-;;;;;;  (23229 21038 681724 630000))
+;;;;;;  (23235 44892 364625 896000))
 
 ;;;***
 

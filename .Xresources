@@ -1,3 +1,14 @@
+
+! Urxvt-specific
+URxvt*font: xft:Droid Sans Mono Slashed for Powerline:size=10
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+URxvt*scrollBar: false
+
+! Set TERM
+xterm*termName: xterm-256color
+
 ! Ocean colors from terminal.sexy
 ! special
 *.foreground:   #c0c5ce
@@ -36,9 +47,3 @@
 *.color7:       #c0c5ce
 *.color15:      #eff1f5
 
-! Urxvt-specific
-URxvt*font: xft:Droid Sans Mono Slashed for Powerline:size=10
-URxvt*scrollTtyOutput: false
-URxvt*scrollWithBuffer: true
-URxvt*scrollTtyKeypress: true
-URxvt*scrollBar: false

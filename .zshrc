@@ -4,7 +4,10 @@ if [ -f /etc/zshrc ]; then
 	. /etc/zshrc
 fi
 
-export TERM="xterm-256color"
+# Set TERM to screen when might use tmux, else, xterm more 
+# widely supported
+#export TERM="xterm-256color"
+#export TERM="screen-256color"
 
 # Edit PATH
 PATH=$PATH:$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:
@@ -31,9 +34,6 @@ POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND=012
 POWERLEVEL9K_DIR_DEFAULT_FOREGROUND=234
 POWERLEVEL9K_DIR_DEFAULT_BACKGROUND=225
 antigen apply
-
-# Powerline
-#. /usr/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Exercism
 if [ -f ~/.config/exercism/exercism_completions.zsh ]; then
