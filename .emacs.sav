@@ -8,14 +8,14 @@
   (add-to-list 'package-archives (cons "melpa" url) t))
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize) ;; Uncomment if choose to undo dependency on use-package
 
 ;; Configure use-package
 (eval-when-compile
   ;; https://github.com/jwiegley/use-package
-  (add-to-list 'load-path "~/.lisp")
+  (add-to-list 'load-path "~/.emacs.d/elpa/")
   (require 'use-package))
 
+(package-initialize) ;; Uncomment if choose to undo dependency on use-package
 
 
 ;;;; Managed by Emacs
@@ -139,3 +139,6 @@
 (add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
 (require 'nyx-theme)
 (load-theme 'nyx t)
+
+
+(package-initialize) ;; Uncomment if choose to undo dependency on use-package
