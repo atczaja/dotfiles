@@ -1,6 +1,12 @@
 
 ;;;; Paackage Config Setup
 ;; Melpa
+;; For new setup, set this file as the .emacs file, then start Emacs.
+;; Things won't work properly until you enable Melpa, install use-package, and
+;; reload to allow use-package to install all other packages.
+;; To accomplish this, place the point on top of the closing parentheses of the
+;; sexps in this block, and press C-x C-e to evaluate them. Then go to
+;; M-x package-list-packages and install use-package.
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
 					(not (gnutls-available-p))))
@@ -17,6 +23,7 @@
   (require 'use-package))
 
 
+
 ;;;; Settings
 ;; Windmove
 (when (fboundp 'windmove-default-keybindings)
@@ -28,11 +35,7 @@
 (load "/home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.el")
 (global-set-key (kbd "C-M-`") 'clang-format-region)
 
-;; Theme
-(add-to-list 'load-path "~/emacs/nyx-theme/")
-(add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
-(require 'nyx-theme)
-(load-theme 'nyx t)
+
 
 ;; Managed by Emacs customize system
 (custom-set-variables
@@ -59,6 +62,7 @@
  '(default ((t (:inherit nil :stipple nil :background "#0f0f0f" :foreground "white smoke" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "PfEd" :family "Droid Sans Mono Slashed for Powerline")))))
 
 
+
 ;;;; Packages managed by use-package
 (use-package autopair
   :ensure t
@@ -71,6 +75,8 @@
 (use-package avy
   :ensure t
   :bind ("C-:" . avy-goto-char-timer))
+(use-package rainbow-mode
+  :ensure t)
 
 (use-package markdown-mode
   :ensure t
@@ -102,3 +108,11 @@
   :ensure t
   :after helm
   :bind ("C-h m" . helm-describe-modes))
+
+
+
+;; Theme
+(add-to-list 'load-path "~/emacs/nyx-theme/")
+(add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
+(require 'nyx-theme)
+(load-theme 'nyx t)

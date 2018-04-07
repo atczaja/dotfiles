@@ -36,6 +36,13 @@ set wildmenu   " better tab completion
 set showcmd    " show incomplete commands
 set path+=**
 
+" Remap i_jj to <Esc> rather than actual Esc
+" character to avoid delays returning to normal
+" mode but without adjusting timeout settings for
+" waiting for escape characters in zsh and tmux
+" The `^ at end ensures point remains in place
+inoremap jj <Esc>`^
+
 " Tab settings
 set tabstop=4
 set shiftwidth=4
