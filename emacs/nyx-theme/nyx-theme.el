@@ -98,6 +98,8 @@
    `(company-tooltip-selection ((t (:background "#707070" :foreground ,blue))))
    `(company-tooltip-common ((t (:foreground ,green))))
    `(company-tooltip-annotation ((t (:foreground ,purple))))
+
+   ;; helm
    )
 
   (custom-theme-set-variables
