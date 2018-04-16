@@ -28,6 +28,8 @@
 ;; Windmove
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+;; Change yes-or-no-p to y-or-n-p
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Clang Format
 ;; To make .clang-format file for a project:
@@ -48,7 +50,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
+    (color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-delay 0)
@@ -108,11 +110,24 @@
   :ensure t
   :after helm
   :bind ("C-h m" . helm-describe-modes))
-
+(use-package magit
+  :ensure t
+  :defer t)
 
 
 ;; Theme
 (add-to-list 'load-path "~/emacs/nyx-theme/")
 (add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
-(require 'nyx-theme)
-(load-theme 'nyx t)
+;; (require 'nyx-theme)
+;; (load-theme 'nyx t)
+(use-package base16-theme
+  :ensure t
+  :demand
+  :config
+  (progn
+    (set 'base16-distinct-fringe-background nil)
+    (set 'base16-highlight-mode-line t)
+    (load-theme 'base16-default-dark t)))
+    ;; (load-theme 'base16-ocean t)))
+    ;; (load-theme 'base16-tomorrow-night t)))
+
