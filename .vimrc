@@ -56,7 +56,6 @@ autocmd GUIenter * set visualbell t_vb=
 "execute pathogen#infect()
 
 "Colorscheme
-set term=screen-256color
 set t_Co=256
 colorscheme jellybeans
 
