@@ -37,7 +37,15 @@
 (load "/home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.el")
 (global-set-key (kbd "C-M-`") 'clang-format-region)
 
-
+;; Remap splitting to automatically switch
+(global-set-key "\C-x2" (lambda ()
+			   (interactive)
+			   (split-window-vertically)
+			   (other-window 1)))
+(global-set-key "\C-x3" (lambda ()
+			   (interactive)
+			   (split-window-horizontally)
+			   (other-window 1)))
 
 ;; Managed by Emacs customize system
 (custom-set-variables
@@ -116,8 +124,8 @@
 
 
 ;; Theme
-(add-to-list 'load-path "~/emacs/nyx-theme/")
-(add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
+;; (add-to-list 'load-path "~/emacs/nyx-theme/")
+;; (add-to-list 'custom-theme-load-path "~/emacs/nyx-theme")
 ;; (require 'nyx-theme)
 ;; (load-theme 'nyx t)
 (use-package base16-theme
@@ -127,7 +135,8 @@
   (progn
     (set 'base16-distinct-fringe-background nil)
     (set 'base16-highlight-mode-line t)
-    (load-theme 'base16-default-dark t)))
-    ;; (load-theme 'base16-ocean t)))
+    ;; (load-theme 'base16-default-dark t)
+    ;; (load-theme 'base16-brewer t)
+    (load-theme 'base16-bright t)
     ;; (load-theme 'base16-tomorrow-night t)))
-
+    ))
