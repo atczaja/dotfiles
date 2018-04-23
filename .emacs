@@ -30,22 +30,27 @@
   (windmove-default-keybindings))
 ;; Change yes-or-no-p to y-or-n-p
 (fset 'yes-or-no-p 'y-or-n-p)
+;; Highlight current line
+(global-hl-line-mode t)
 
 ;; Clang Format
 ;; To make .clang-format file for a project:
 ;; $ clang-format -style=llvm -dump-config > .clang-format
-(load "/home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.el")
-(global-set-key (kbd "C-M-`") 'clang-format-region)
+(unless (or
+	 (string-equal system-type "windows-nt")
+	 (string-equal system-type "ms-dos"))
+  (load "/home/aczaja/llvm/llvm/tools/clang/tools/clang-format/clang-format.el")
+  (global-set-key (kbd "C-M-`") 'clang-format-region))
 
 ;; Remap splitting to automatically switch
-(global-set-key "\C-x2" (lambda ()
-			   (interactive)
-			   (split-window-vertically)
-			   (other-window 1)))
-(global-set-key "\C-x3" (lambda ()
-			   (interactive)
-			   (split-window-horizontally)
-			   (other-window 1)))
+(global-set-key (kbd "C-x 2") (lambda ()
+		     (interactive)
+		     (split-window-vertically)
+		     (other-window 1)))
+(global-set-key (kbd "C-x 3") (lambda ()
+		     (interactive)
+		     (split-window-horizontally)
+		     (other-window 1)))
 
 ;; Managed by Emacs customize system
 (custom-set-variables
@@ -58,7 +63,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
+    (diminish rainbow-mode counsel swiper ivy color-theme try color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-delay 0)
@@ -74,8 +79,11 @@
 
 
 ;;;; Packages managed by use-package
+(use-package diminish
+  :ensure t)
 (use-package autopair
   :ensure t
+  :diminish autopair-mode
   :config (autopair-global-mode 1))
 (use-package paredit
   :ensure t
@@ -104,23 +112,50 @@
   :ensure t
   :defer t)
 
-(use-package helm
+;; (use-package helm
+;;   :ensure t
+;;   :bind ("M-x" . helm-M-x)
+;;   :config (helm-autoresize-mode 1))
+;; (use-package helm-descbinds
+;;   :ensure t
+;;   :after helm
+;;   :bind ("C-h b" . helm-descbinds)
+;;   :init
+;;   (fset 'describe-bindings 'helm-desdbinds))
+;; (use-package helm-describe-modes
+;;   :ensure t
+;;   :after helm
+;;   :bind ("C-h m" . helm-describe-modes))
+(use-package ivy
   :ensure t
-  :bind ("M-x" . helm-M-x)
-  :config (helm-autoresize-mode 1))
-(use-package helm-descbinds
+  :diminish ivy-mode
+  :bind ("C-c C-r" . ivy-resume)
+  :config
+  (ivy-mode t)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  ;; (setq ivy-count-format "(%d/%d) ")
+  )`
+(use-package swiper
   :ensure t
-  :after helm
-  :bind ("C-h b" . helm-descbinds)
-  :init
-  (fset 'describe-bindings 'helm-desdbinds))
-(use-package helm-describe-modes
+  :bind (("C-s" . swiper)
+	 ("C-r" . swiper))
+  )
+(use-package counsel
   :ensure t
-  :after helm
-  :bind ("C-h m" . helm-describe-modes))
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)
+	 ("C-h f" . counsel-describe-function)
+	 ("C-h v" . counsel-describe-variable))
+  )
+  
+
 (use-package magit
-  :ensure t
-  :defer t)
+    :ensure t
+    :defer t)
+(use-package try
+  :ensure t)
+
 
 
 ;; Theme
@@ -135,8 +170,8 @@
   (progn
     (set 'base16-distinct-fringe-background nil)
     (set 'base16-highlight-mode-line t)
-    ;; (load-theme 'base16-default-dark t)
+    (load-theme 'base16-default-dark t)
     ;; (load-theme 'base16-brewer t)
-    (load-theme 'base16-bright t)
+    ;; (load-theme 'base16-bright t)
     ;; (load-theme 'base16-tomorrow-night t)))
     ))
