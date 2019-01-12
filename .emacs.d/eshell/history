@@ -1,0 +1,11 @@
+bash
+cd /ssh:aczaja@192.168.0.7:~
+exit
+bash.exe 
+exit
+powershell.exe
+exit
+whoami
+whoami.exe 
+directmanipulation.dll 
+exit
