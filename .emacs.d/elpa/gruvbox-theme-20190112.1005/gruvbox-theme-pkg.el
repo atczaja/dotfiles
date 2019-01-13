@@ -1,4 +1,4 @@
-(define-package "gruvbox-theme" "20181013.1144" "A retro-groove colour theme for Emacs"
+(define-package "gruvbox-theme" "20190112.1005" "A retro-groove colour theme for Emacs"
   '((autothemer "0.2"))
   :authors
   '(("Jason Milkins" . "jasonm23@gmail.com"))
