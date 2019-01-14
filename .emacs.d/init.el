@@ -32,6 +32,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Highlight current line
 (global-hl-line-mode t)
+;; Modern display line numbers
+(global-display-line-numbers-mode)
 
 ;; Clang Format
 ;; To make .clang-format file for a project:
@@ -62,12 +64,11 @@
  '(custom-safe-themes
    (quote
     ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" default)))
- '(global-linum-mode t)
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (company-racer racer gruvbox-theme creamsody-theme northcode-theme danneskjold-theme badwolf-theme ample-theme zenburn-theme badger-theme noctilux-theme firecode-theme darktooth-theme panda-theme srcery-theme jbeans-theme counsel-tramp flx smart-mode-line ace-window company-irony irony company-jedi company diminish rainbow-mode counsel swiper ivy color-theme try color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
+    (yaml-mode company-racer racer gruvbox-theme creamsody-theme northcode-theme danneskjold-theme badwolf-theme ample-theme zenburn-theme badger-theme noctilux-theme firecode-theme darktooth-theme panda-theme srcery-theme jbeans-theme counsel-tramp flx smart-mode-line ace-window company-irony irony company-jedi company diminish rainbow-mode counsel swiper ivy color-theme try color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-delay 0)
@@ -78,7 +79,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#1c1c1c" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 85 :width normal :foundry "outline" :family "Roboto Mono for Powerline")))))
+ '(default ((t (:inherit nil :stipple nil :background "#1c1c1c" :foreground "#f6f3e8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "pyrs" :family "Roboto Mono for Powerline")))))
 
 
 
@@ -118,6 +119,14 @@
 (use-package vimrc-mode
   :ensure t
   :defer t)
+(use-package yaml-mode
+  :ensure t
+  :defer t
+  :mode ("\\.ya?ml\\'" . yaml-mode)
+  :config
+  (add-hook 'yaml-mode-hook
+	    '(lambda ()
+	       (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
 (use-package matlab-mode
   :ensure t
