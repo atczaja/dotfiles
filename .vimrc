@@ -1,31 +1,37 @@
+" Set up vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" Vundle
+" vim-plug
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged')
 
 " Let Vundle manage Vundle
-Plugin 'Vundlevim/Vundle.vim'
+Plug 'Vundlevim/Vundle.vim'
 
 " Colorscheme and Airline plugins
-Plugin 'kristijanhusak/vim-hybrid-material'
-Plugin 'dikiaap/minimalist'
-Plugin 'mhartington/oceanic-next'
-Plugin 'ajh17/Spacegray.vim'
-Plugin 'jacoborus/tender.vim'
-Plugin 'ajmwagar/vim-deus'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'dikiaap/minimalist'
+Plug 'mhartington/oceanic-next'
+Plug 'ajh17/Spacegray.vim'
+Plug 'jacoborus/tender.vim'
+Plug 'ajmwagar/vim-deus'
 "Plugin 'vim-airline/vim-airline'
 "Plugin 'vim-airline/vim-airline-themes'
-Plugin 'itchyny/lightline.vim'
-Plugin 'mgee/lightline-bufferline'
+Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'
 
 " Language plugins
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'rust-lang/rust.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rust-lang/rust.vim'
 
-call vundle#end()
+call plug#end()
 
 " Generic
 syntax enable
