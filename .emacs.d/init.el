@@ -68,7 +68,7 @@
  '(menu-bar-mode nil)
  '(package-selected-packages
    (quote
-    (yaml-mode company-racer racer gruvbox-theme creamsody-theme northcode-theme danneskjold-theme badwolf-theme ample-theme zenburn-theme badger-theme noctilux-theme firecode-theme darktooth-theme panda-theme srcery-theme jbeans-theme counsel-tramp flx smart-mode-line ace-window company-irony irony company-jedi company diminish rainbow-mode counsel swiper ivy color-theme try color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
+    (danneskjold yaml-mode company-racer racer gruvbox-theme creamsody-theme northcode-theme danneskjold-theme badwolf-theme ample-theme zenburn-theme badger-theme noctilux-theme firecode-theme darktooth-theme panda-theme srcery-theme jbeans-theme counsel-tramp flx smart-mode-line ace-window company-irony irony company-jedi company diminish rainbow-mode counsel swiper ivy color-theme try color-theme-sanityinc-tomorrow base16-theme matlab-mode helm-describe-modes helm-descbinds helm rust-mode vimrc-mode avy paredit markdown-mode smartparens autopair use-package)))
  '(ring-bell-function (quote ignore))
  '(scroll-bar-mode nil)
  '(show-paren-delay 0)
@@ -219,7 +219,7 @@
     (setq company-jedi-python-bin "python3"))
   (setq jedi:environment-virtualenv
   	(list (expand-file-name
-  	       "~/.emacs.d/.python-environments/" )))  ;; C:\Users\atcza\%.emacs.d\%.python-environments
+  	       "C:/Users/atcza/.emacs.d/.python-environments/" )))  ;; C:\Users\atcza\%.emacs.d\%.python-environments
   (add-hook 'python-mode-hook 'jedi:setup)
   ;; (defun config/enable-company-jedi ()
     ;; (add-to-list 'company-backends 'company-jedi))
@@ -302,13 +302,11 @@
 ;;   :config (load-theme 'gruvbox-dark-medium t))
 ;; (use-package danneskjold-theme
 ;; :ensure t)
-;; (use-package ample-theme
-;;   :init (progn (load-theme 'ample t t)
-;; 	       (load-theme 'ample-flat t t)
-;; 	       (load-theme 'ample-light t t)
-;; 	       (enable-theme 'ample-flat))
-;;   :defer t
-;;   :ensure t)
+
+;; (use-package danneskjold-theme
+;;   :ensure t
+;;   :config (load-theme danneskjold-theme t))
+
 (use-package gruvbox-theme
   :ensure t
   :config (load-theme 'gruvbox-dark-soft t))

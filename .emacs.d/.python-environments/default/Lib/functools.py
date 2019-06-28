@@ -19,15 +19,9 @@ except ImportError:
     pass
 from abc import get_cache_token
 from collections import namedtuple
-from types import MappingProxyType
-from weakref import WeakKeyDictionary
-try:
-    from _thread import RLock
-except ImportError:
-    class RLock:
-        'Dummy reentrant lock for builds without threads'
-        def __enter__(self): pass
-        def __exit__(self, exctype, excinst, exctb): pass
+# import types, weakref  # Deferred to single_dispatch()
+from reprlib import recursive_repr
+from _thread import RLock
 
 
 ################################################################################
@@ -192,7 +186,7 @@ _convert = {
 def total_ordering(cls):
     """Class decorator that fills in missing ordering methods"""
     # Find user-defined comparisons (not those inherited from object).
-    roots = [op for op in _convert if getattr(cls, op, None) is not getattr(object, op, None)]
+    roots = {op for op in _convert if getattr(cls, op, None) is not getattr(object, op, None)}
     if not roots:
         raise ValueError('must define at least one ordering operation: < > <= >=')
     root = max(roots)       # prefer __lt__ to __le__ to __gt__ to __ge__
@@ -237,26 +231,83 @@ except ImportError:
 ################################################################################
 
 # Purely functional, no descriptor behaviour
-def partial(func, *args, **keywords):
+class partial:
     """New function with partial application of the given arguments
     and keywords.
     """
-    if hasattr(func, 'func'):
-        args = func.args + args
-        tmpkw = func.keywords.copy()
-        tmpkw.update(keywords)
-        keywords = tmpkw
-        del tmpkw
-        func = func.func
 
-    def newfunc(*fargs, **fkeywords):
-        newkeywords = keywords.copy()
-        newkeywords.update(fkeywords)
-        return func(*(args + fargs), **newkeywords)
-    newfunc.func = func
-    newfunc.args = args
-    newfunc.keywords = keywords
-    return newfunc
+    __slots__ = "func", "args", "keywords", "__dict__", "__weakref__"
+
+    def __new__(*args, **keywords):
+        if not args:
+            raise TypeError("descriptor '__new__' of partial needs an argument")
+        if len(args) < 2:
+            raise TypeError("type 'partial' takes at least one argument")
+        cls, func, *args = args
+        if not callable(func):
+            raise TypeError("the first argument must be callable")
+        args = tuple(args)
+
+        if hasattr(func, "func"):
+            args = func.args + args
+            tmpkw = func.keywords.copy()
+            tmpkw.update(keywords)
+            keywords = tmpkw
+            del tmpkw
+            func = func.func
+
+        self = super(partial, cls).__new__(cls)
+
+        self.func = func
+        self.args = args
+        self.keywords = keywords
+        return self
+
+    def __call__(*args, **keywords):
+        if not args:
+            raise TypeError("descriptor '__call__' of partial needs an argument")
+        self, *args = args
+        newkeywords = self.keywords.copy()
+        newkeywords.update(keywords)
+        return self.func(*self.args, *args, **newkeywords)
+
+    @recursive_repr()
+    def __repr__(self):
+        qualname = type(self).__qualname__
+        args = [repr(self.func)]
+        args.extend(repr(x) for x in self.args)
+        args.extend(f"{k}={v!r}" for (k, v) in self.keywords.items())
+        if type(self).__module__ == "functools":
+            return f"functools.{qualname}({', '.join(args)})"
+        return f"{qualname}({', '.join(args)})"
+
+    def __reduce__(self):
+        return type(self), (self.func,), (self.func, self.args,
+               self.keywords or None, self.__dict__ or None)
+
+    def __setstate__(self, state):
+        if not isinstance(state, tuple):
+            raise TypeError("argument to __setstate__ must be a tuple")
+        if len(state) != 4:
+            raise TypeError(f"expected 4 items in state, got {len(state)}")
+        func, args, kwds, namespace = state
+        if (not callable(func) or not isinstance(args, tuple) or
+           (kwds is not None and not isinstance(kwds, dict)) or
+           (namespace is not None and not isinstance(namespace, dict))):
+            raise TypeError("invalid partial state")
+
+        args = tuple(args) # just in case it's a subclass
+        if kwds is None:
+            kwds = {}
+        elif type(kwds) is not dict: # XXX does it need to be *exactly* dict?
+            kwds = dict(kwds)
+        if namespace is None:
+            namespace = {}
+
+        self.__dict__ = namespace
+        self.func = func
+        self.args = args
+        self.keywords = kwds
 
 try:
     from _functools import partial
@@ -363,7 +414,7 @@ class _HashedSeq(list):
 def _make_key(args, kwds, typed,
              kwd_mark = (object(),),
              fasttypes = {int, str, frozenset, type(None)},
-             sorted=sorted, tuple=tuple, type=type, len=len):
+             tuple=tuple, type=type, len=len):
     """Make a cache key from optionally typed positional and keyword arguments
 
     The key is constructed in a way that is flat as possible rather than
@@ -374,16 +425,19 @@ def _make_key(args, kwds, typed,
     saves space and improves lookup speed.
 
     """
+    # All of code below relies on kwds preserving the order input by the user.
+    # Formerly, we sorted() the kwds before looping.  The new way is *much*
+    # faster; however, it means that f(x=1, y=2) will now be treated as a
+    # distinct call from f(y=2, x=1) which will be cached separately.
     key = args
     if kwds:
-        sorted_items = sorted(kwds.items())
         key += kwd_mark
-        for item in sorted_items:
+        for item in kwds.items():
             key += item
     if typed:
         key += tuple(type(v) for v in args)
         if kwds:
-            key += tuple(type(v) for k, v in sorted_items)
+            key += tuple(type(v) for v in kwds.values())
     elif len(key) == 1 and type(key[0]) in fasttypes:
         return key[0]
     return _HashedSeq(key)
@@ -435,6 +489,7 @@ def _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo):
     hits = misses = 0
     full = False
     cache_get = cache.get    # bound method to lookup a key or return None
+    cache_len = cache.__len__  # get cache size without calling len()
     lock = RLock()           # because linkedlist updates aren't threadsafe
     root = []                # root of the circular doubly linked list
     root[:] = [root, root, None, None]     # initialize by pointing to self
@@ -516,14 +571,16 @@ def _lru_cache_wrapper(user_function, maxsize, typed, _CacheInfo):
                     last = root[PREV]
                     link = [last, root, key, result]
                     last[NEXT] = root[PREV] = cache[key] = link
-                    full = (len(cache) >= maxsize)
+                    # Use the cache_len bound method instead of the len() function
+                    # which could potentially be wrapped in an lru_cache itself.
+                    full = (cache_len() >= maxsize)
                 misses += 1
             return result
 
     def cache_info():
         """Report cache statistics"""
         with lock:
-            return _CacheInfo(hits, misses, maxsize, len(cache))
+            return _CacheInfo(hits, misses, maxsize, cache_len())
 
     def cache_clear():
         """Clear the cache and cache statistics"""
@@ -695,10 +752,14 @@ def singledispatch(func):
     function acts as the default implementation, and additional
     implementations can be registered using the register() attribute of the
     generic function.
-
     """
+    # There are many programs that use functools without singledispatch, so we
+    # trade-off making singledispatch marginally slower for the benefit of
+    # making start-up of such applications slightly faster.
+    import types, weakref
+
     registry = {}
-    dispatch_cache = WeakKeyDictionary()
+    dispatch_cache = weakref.WeakKeyDictionary()
     cache_token = None
 
     def dispatch(cls):
@@ -732,7 +793,23 @@ def singledispatch(func):
         """
         nonlocal cache_token
         if func is None:
-            return lambda f: register(cls, f)
+            if isinstance(cls, type):
+                return lambda f: register(cls, f)
+            ann = getattr(cls, '__annotations__', {})
+            if not ann:
+                raise TypeError(
+                    f"Invalid first argument to `register()`: {cls!r}. "
+                    f"Use either `@register(some_class)` or plain `@register` "
+                    f"on an annotated function."
+                )
+            func = cls
+
+            # only import typing if annotation parsing is necessary
+            from typing import get_type_hints
+            argname, cls = next(iter(get_type_hints(func).items()))
+            assert isinstance(cls, type), (
+                f"Invalid annotation for {argname!r}. {cls!r} is not a class."
+            )
         registry[cls] = func
         if cache_token is None and hasattr(cls, '__abstractmethods__'):
             cache_token = get_cache_token()
@@ -740,12 +817,17 @@ def singledispatch(func):
         return func
 
     def wrapper(*args, **kw):
+        if not args:
+            raise TypeError(f'{funcname} requires at least '
+                            '1 positional argument')
+
         return dispatch(args[0].__class__)(*args, **kw)
 
+    funcname = getattr(func, '__name__', 'singledispatch function')
     registry[object] = func
     wrapper.register = register
     wrapper.dispatch = dispatch
-    wrapper.registry = MappingProxyType(registry)
+    wrapper.registry = types.MappingProxyType(registry)
     wrapper._clear_cache = dispatch_cache.clear
     update_wrapper(wrapper, func)
     return wrapper
